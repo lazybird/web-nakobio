@@ -163,6 +163,13 @@ const t = useTranslations(lang);
     z-index: 0;
   }
 
+  @media (max-width: 768px) {
+    .hero-bg {
+      background-attachment: scroll;
+    }
+  }
+
+
   .hero-bg-overlay {
     position: absolute;
     inset: 0;
@@ -446,20 +453,24 @@ const t = useTranslations(lang);
     flex-grow: 1;
   }
 
+  /* Bouton sable/doré aux bords arrondis (pill-shaped) */
   .action-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     max-width: 250px;
+    min-height: 44px;
     padding: 0.75rem 1.25rem;
     background-color: #E3BD94;
     color: #FFFFFF;
     font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     font-weight: 600;
     border-radius: 9999px;
     text-decoration: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     transition: background-color 0.2s ease, transform 0.2s ease;
   }
 
