@@ -1,0 +1,471 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+import { useTranslations } from '../../i18n/translations';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<BaseLayout 
+  title="Nakôbio — Bio-Intensive Market Gardening & Agroecology"
+  description={t('site.description')}
+  lang={lang}
+  t={t}
+>
+  <!-- HERO IMMERSIF AVEC EFFET PARALLAXE & LOGO OFFICIEL -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-bg-overlay" aria-hidden="true"></div>
+
+    <div class="container hero-container">
+      <!-- Logo officiel placé en haut au centre -->
+      <div class="hero-logo-wrap scroll-reveal">
+        <img src="/nakobio-logo.svg" alt="Nakôbio" class="hero-logo" />
+      </div>
+
+      <!-- Devise / Titre principal en Quicksand ocre sable -->
+      <div class="hero-header scroll-reveal delay-1">
+        <h1 class="hero-title">{t('hero.title')}</h1>
+      </div>
+
+      <!-- 3 Piliers avec fond translucide fumé -->
+      <div class="hero-pillars scroll-reveal delay-2">
+        <div class="pillar-card">
+          <h2 class="pillar-title">{t('hero.pillar1.title')}</h2>
+          <p class="pillar-desc">{t('hero.pillar1.desc')}</p>
+        </div>
+        <div class="pillar-card">
+          <h2 class="pillar-title">{t('hero.pillar2.title')}</h2>
+          <p class="pillar-desc">{t('hero.pillar2.desc')}</p>
+        </div>
+        <div class="pillar-card">
+          <h2 class="pillar-title">{t('hero.pillar3.title')}</h2>
+          <p class="pillar-desc">{t('hero.pillar3.desc')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTRE VISION -->
+  <section id="vision" class="vision-section">
+    <div class="container vision-container">
+      <h2 class="section-title text-center vision-title scroll-reveal">{t('vision.title')}</h2>
+      
+      <div class="vision-texts scroll-reveal delay-1">
+        <p class="vision-lead text-center">
+          {t('vision.lead1')}
+        </p>
+        <p class="vision-lead text-center">
+          {t('vision.lead2')}
+        </p>
+      </div>
+
+      <div class="vision-photo-wrap scroll-reveal delay-2">
+        <img 
+          src="/images/farm-overview.jpg" 
+          alt="Nakôbio agroecological farming" 
+          class="vision-photo" 
+          loading="lazy" 
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIONS / FOR SUSTAINABLE AGRICULTURE! -->
+  <section id="actions" class="actions-section">
+    <div class="container">
+      <div class="actions-header text-center scroll-reveal">
+        <h2 class="actions-title">{t('actions.title')}</h2>
+        <p class="actions-intro">
+          {t('actions.intro')}
+          <br class="hidden-mobile" />
+          {t('actions.consult')} 
+          <a href="https://tinyurl.com/nakobio-docs/" target="_blank" rel="noopener noreferrer" class="text-link">{t('actions.docs_link')}</a> 
+          {t('actions.and')} 
+          <a href="https://tinyurl.com/nakobio-photos/" target="_blank" rel="noopener noreferrer" class="text-link">{t('actions.photos_link')}</a> {t('actions.learn_more')}
+        </p>
+      </div>
+
+      <div class="actions-grid">
+        <!-- Carte 1 : Get Trained -->
+        <div class="action-card scroll-reveal delay-1">
+          <div class="card-media">
+            <img src="/images/cta-farming.jpg" alt={t('actions.card1.title')} class="card-img" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{t('actions.card1.title')}</h3>
+            <p class="card-desc">{t('actions.card1.desc')}</p>
+            <a href={t('actions.card1.url')} target="_blank" rel="noopener noreferrer" class="action-btn">
+              {t('actions.card1.cta')}
+            </a>
+          </div>
+        </div>
+
+        <!-- Carte 2 : Support the Project -->
+        <div class="action-card scroll-reveal delay-2">
+          <div class="card-media">
+            <img src="/images/cta-donate.png" alt={t('actions.card3.title')} class="card-img" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{t('actions.card3.title')}</h3>
+            <p class="card-desc">{t('actions.card3.desc')}</p>
+            <a href={t('actions.card3.url')} target="_blank" rel="noopener noreferrer" class="action-btn">
+              {t('actions.card3.cta')}
+            </a>
+          </div>
+        </div>
+
+        <!-- Carte 3 : Join the Community -->
+        <div class="action-card scroll-reveal delay-3">
+          <div class="card-media card-media-illustration">
+            <img src="/images/chat-cuate.svg" alt={t('actions.card2.title')} class="card-illustration" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{t('actions.card2.title')}</h3>
+            <p class="card-desc">{t('actions.card2.desc')}</p>
+            <a href={t('actions.card2.url')} target="_blank" rel="noopener noreferrer" class="action-btn">
+              {t('actions.card2.cta')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE TERRAIN -->
+  <Gallery 
+    title={t('gallery.title')}
+    description={t('gallery.desc')}
+    viewAllText={t('gallery.view_all')}
+  />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    color: #FFFFFF;
+    min-height: 94vh;
+    padding-top: clamp(4.5rem, 8vw, 7rem);
+    padding-bottom: clamp(4.5rem, 8vw, 6.5rem);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 0;
+  }
+
+  .hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 30, 20, 0.65);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-logo-wrap {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .hero-logo {
+    width: clamp(240px, 35vw, 420px);
+    height: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+    margin: 0 auto;
+  }
+
+  .hero-header {
+    text-align: center;
+    margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  }
+
+  .hero-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+    font-weight: 500;
+    line-height: 1.3;
+    color: #E3BD94;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+
+  .hero-pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .hero-pillars {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+  }
+
+  .pillar-card {
+    background: rgba(227, 189, 148, 0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(227, 189, 148, 0.35);
+    border-radius: var(--radius-md);
+    padding: 2.25rem 1.75rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 200px;
+    transition: transform var(--transition-base), background-color var(--transition-base);
+  }
+
+  .pillar-card:hover {
+    background: rgba(227, 189, 148, 0.28);
+    transform: translateY(-3px);
+  }
+
+  .pillar-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  .pillar-desc {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+  }
+
+  .vision-section {
+    padding-top: clamp(4.5rem, 8vw, 7rem);
+    padding-bottom: clamp(4.5rem, 8vw, 7rem);
+    background-color: #FFFFFF;
+  }
+
+  .vision-container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .vision-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    color: #385125;
+    margin-bottom: 2rem;
+  }
+
+  .vision-texts {
+    max-width: 820px;
+    margin: 0 auto 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .vision-lead {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    line-height: 1.7;
+    color: #979743;
+    margin: 0;
+  }
+
+  .vision-photo-wrap {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+  }
+
+  .vision-photo {
+    width: 100%;
+    height: auto;
+    max-height: 640px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .actions-section {
+    padding-top: clamp(5rem, 8vw, 7.5rem);
+    padding-bottom: clamp(5rem, 8vw, 7.5rem);
+    background-color: #283C25;
+    color: #FFFFFF;
+  }
+
+  .actions-header {
+    max-width: 780px;
+    margin: 0 auto clamp(3.5rem, 6vw, 4.5rem);
+  }
+
+  .actions-title {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 700;
+    color: #E3BD94;
+    margin-bottom: 1.5rem;
+  }
+
+  .actions-intro {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    line-height: 1.7;
+    color: rgba(227, 189, 148, 0.85);
+    margin: 0;
+  }
+
+  .text-link {
+    color: #E3BD94;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+    transition: color var(--transition-fast);
+  }
+
+  .text-link:hover {
+    color: #FFFFFF;
+  }
+
+  @media (max-width: 640px) {
+    .hidden-mobile {
+      display: none;
+    }
+  }
+
+  .actions-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .actions-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .action-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .action-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  }
+
+  .card-media {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .action-card:hover .card-img {
+    transform: scale(1.05);
+  }
+
+  .card-media-illustration {
+    padding: 1.5rem;
+    background: #FFFFFF;
+  }
+
+  .card-illustration {
+    max-height: 220px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .card-body {
+    padding: 1.75rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .card-title {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #385125;
+    margin: 0 0 1rem 0;
+  }
+
+  .card-desc {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #979743;
+    margin: 0 0 2rem 0;
+    flex-grow: 1;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 250px;
+    padding: 0.75rem 1.25rem;
+    background-color: #E3BD94;
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .action-btn:hover {
+    background-color: #CAA276;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+  }
+</style>

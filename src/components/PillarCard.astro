@@ -1,0 +1,202 @@
+---
+interface Props {
+  tag: string;
+  title: string;
+  description: string;
+  ctaText: string;
+  ctaHref: string;
+  iconType: 'training' | 'farm' | 'community';
+  imageSrc?: string;
+  isExternal?: boolean;
+}
+
+const { tag, title, description, ctaText, ctaHref, iconType, imageSrc, isExternal = false } = Astro.props;
+---
+
+<div class="pillar-card card">
+  {imageSrc && (
+    <div class="card-image-wrap">
+      <img src={imageSrc} alt={title} class="card-image" loading="lazy" />
+      <span class="card-tag">{tag}</span>
+    </div>
+  )}
+
+  <div class="card-content">
+    {!imageSrc && (
+      <div class="card-header-simple">
+        <span class="card-tag">{tag}</span>
+      </div>
+    )}
+
+    <div class="title-row">
+      <div class={`pillar-icon icon-${iconType}`}>
+        {iconType === 'training' && (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0.5-0.5"></path>
+            <path d="M6 2v20"></path>
+          </svg>
+        )}
+        {iconType === 'farm' && (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a10 10 0 0 0-10 10c0 5.25 7 10 10 10s10-4.75 10-10A10 10 0 0 0 12 2z"></path>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+        )}
+        {iconType === 'community' && (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        )}
+      </div>
+      <h3 class="card-title">{title}</h3>
+    </div>
+
+    <p class="card-desc">{description}</p>
+
+    <div class="card-footer">
+      <a 
+        href={ctaHref} 
+        class="card-link"
+        target={isExternal ? "_blank" : "_self"}
+        rel={isExternal ? "noopener noreferrer" : ""}
+      >
+        <span>{ctaText}</span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pillar-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    border-radius: var(--radius-lg);
+  }
+
+  .card-image-wrap {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .pillar-card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .card-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 253, 246, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--color-brand-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .card-header-simple {
+    margin-bottom: 1rem;
+  }
+
+  .card-header-simple .card-tag {
+    position: static;
+    display: inline-block;
+  }
+
+  .card-content {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .pillar-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon-training {
+    background: rgba(47, 74, 52, 0.1);
+    color: var(--color-brand-primary);
+  }
+
+  .icon-farm {
+    background: rgba(200, 104, 50, 0.12);
+    color: var(--color-brand-secondary);
+  }
+
+  .icon-community {
+    background: rgba(224, 160, 48, 0.15);
+    color: var(--color-brand-accent-dark);
+  }
+
+  .card-title {
+    font-size: var(--text-xl);
+    font-family: var(--font-serif);
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .card-desc {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-ink-soft);
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .card-footer {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.25rem;
+    margin-top: auto;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-brand-secondary);
+    text-decoration: none;
+    transition: gap var(--transition-fast), color var(--transition-fast);
+  }
+
+  .pillar-card:hover .card-link {
+    gap: 0.75rem;
+    color: var(--color-brand-secondary-dark);
+  }
+</style>

@@ -1,0 +1,208 @@
+---
+import { languages } from '../i18n/translations';
+
+interface Props {
+  currentLang: 'fr' | 'en' | 'de';
+  t: (key: string) => string;
+}
+
+const { currentLang, t } = Astro.props;
+
+const getLangUrl = (lang: string) => {
+  if (lang === 'fr') return '/';
+  return `/${lang}`;
+};
+---
+
+<footer id="contact" class="footer">
+  <div class="container footer-inner">
+    <!-- Initiative Dala Seeds / Nakôbio avec Logo -->
+    <div class="footer-col-initiative">
+      <img src="/nakobio-logo.svg" alt="Nakôbio" class="footer-logo" />
+      <p class="initiative-text">
+        {t('footer.initiative')}
+      </p>
+    </div>
+
+    <!-- Sélecteur de Langues -->
+    <div class="footer-col">
+      <h3 class="footer-heading">{t('footer.languages')}</h3>
+      <div class="lang-links">
+        {Object.entries(languages).map(([code, label]) => (
+          <a
+            href={getLangUrl(code)}
+            class:list={['lang-link', { active: currentLang === code }]}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Contact & Réseaux sociaux -->
+    <div class="footer-col">
+      <h3 class="footer-heading">{t('footer.find_us')}</h3>
+      <a href={`mailto:${t('footer.email')}`} class="email-link">
+        {t('footer.email')}
+      </a>
+
+      <div class="social-links">
+        <a href="https://www.youtube.com/@nakobio" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+        <a href="https://chat.whatsapp.com/DNqsiZHqQ6h9w1RKuTO4US" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.301-.15-1.782-.879-2.057-.98-.276-.1-.476-.15-.676.15-.2.3-.776.98-.952 1.18-.175.2-.351.226-.652.075-.3-.15-1.27-.468-2.42-1.493-.895-.798-1.5-1.784-1.675-2.084-.175-.3-.019-.462.132-.612.136-.135.301-.35.451-.525.15-.175.2-.3.301-.5.1-.2.05-.375-.025-.525-.075-.15-.676-1.63-1.026-2.23-.25-.6-.502-.519-.676-.525l-.576-.01c-.2 0-.526.075-.802.375-.275.3-1.052 1.028-1.052 2.508 0 1.48 1.077 2.91 1.228 3.11.15.2 2.12 3.237 5.136 4.54.717.31 1.277.496 1.713.635.72.23 1.375.197 1.893.12.578-.088 1.782-.728 2.032-1.43.25-.702.25-1.303.175-1.43-.075-.125-.276-.2-.577-.35zM12.042 21.928a9.88 9.88 0 0 1-5.038-1.378l-.361-.214-3.741.981.999-3.647-.235-.374a9.86 9.86 0 0 1-1.51-5.26c0-5.445 4.43-9.875 9.884-9.875 2.64 0 5.12 1.028 6.983 2.894a9.82 9.82 0 0 1 2.89 6.985c0 5.447-4.43 9.877-9.872 9.877zM12.042 0C5.399 0 0 5.399 0 12.041c0 2.12.553 4.188 1.606 6.011L0 24l6.126-1.607a12.003 12.003 0 0 0 5.916 1.55h.005c6.642 0 12.04-5.4 12.04-12.042 0-3.217-1.252-6.242-3.528-8.518A11.96 11.96 0 0 0 12.042 0z"/>
+          </svg>
+        </a>
+        <a href="https://t.me/nakobio_intensif/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Telegram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <div class="bottom-flex">
+      <span>© 2025 Nakôbio. {t('footer.rights')}</span>
+      <span>nakobio.asso@gmail.com</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: #141E16;
+    color: #FFFFFF;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: clamp(3.5rem, 6vw, 5rem);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 2fr 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .footer-logo {
+    height: 38px;
+    width: auto;
+    margin-bottom: 1.25rem;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+
+  .initiative-text {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 480px;
+    margin: 0;
+  }
+
+  .footer-heading {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: #E3BD94;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .lang-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .lang-link {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .lang-link:hover,
+  .lang-link.active {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  .lang-link.active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .email-link {
+    display: inline-block;
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    margin-bottom: 1.25rem;
+    transition: color var(--transition-fast);
+  }
+
+  .email-link:hover {
+    color: #E3BD94;
+    text-decoration: underline;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .social-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all var(--transition-fast);
+  }
+
+  .social-icon-btn:hover {
+    background: #E3BD94;
+    color: #141E16;
+    border-color: #E3BD94;
+    transform: translateY(-2px);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem 0;
+  }
+
+  .bottom-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media (min-width: 640px) {
+    .bottom-flex {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+</style>

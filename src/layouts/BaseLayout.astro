@@ -1,0 +1,141 @@
+---
+import Footer from '../components/Footer.astro';
+import { languages } from '../i18n/translations';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: 'fr' | 'en' | 'de';
+  t: (key: string) => string;
+}
+
+const { title, description, lang, t } = Astro.props;
+const currentUrl = Astro.url.href;
+
+const getLangUrl = (targetLang: string) => {
+  if (targetLang === 'fr') return '/';
+  return `/${targetLang}`;
+};
+---
+
+<!DOCTYPE html>
+<html lang={lang} data-theme="nakobio">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={currentUrl} />
+
+  <!-- Metatags principaux -->
+  <title>{title}</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description || t('site.description')} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={currentUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description || t('site.description')} />
+  <meta property="og:image" content="/images/hero-bg.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description || t('site.description')} />
+  <meta property="twitter:image" content="/images/hero-bg.jpg" />
+
+  <!-- Google Fonts : Playfair Display (Serif) & Quicksand (Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Sélecteur de langue discret flottant en haut à droite -->
+  <header class="top-lang-bar">
+    <div class="lang-picker">
+      {Object.entries(languages).map(([code, label]) => (
+        <a
+          href={getLangUrl(code)}
+          class:list={['lang-btn', { active: lang === code }]}
+          title={label}
+        >
+          {code.toUpperCase()}
+        </a>
+      ))}
+    </div>
+  </header>
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <Footer currentLang={lang} t={t} />
+
+  <!-- Script d'apparition au scroll (IntersectionObserver fluide et fiable) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.scroll-reveal');
+      
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach((el) => observer.observe(el));
+      } else {
+        revealElements.forEach((el) => el.classList.add('revealed'));
+      }
+    });
+  </script>
+</body>
+</html>
+
+<style>
+  .top-lang-bar {
+    position: absolute;
+    top: 1.25rem;
+    right: clamp(1.25rem, 3vw, 2.5rem);
+    z-index: 50;
+  }
+
+  .lang-picker {
+    display: inline-flex;
+    background: rgba(18, 30, 20, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 3px;
+    border-radius: var(--radius-full, 9999px);
+    border: 1px solid rgba(227, 189, 148, 0.35);
+  }
+
+  .lang-btn {
+    font-family: var(--font-sans, "Quicksand", sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-full, 9999px);
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all var(--transition-fast, 150ms ease);
+    letter-spacing: 0.05em;
+  }
+
+  .lang-btn:hover {
+    color: #FFFFFF;
+  }
+
+  .lang-btn.active {
+    background: #E3BD94;
+    color: #141E16;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  viewAllText: string;
+}
+
+const { title, description, viewAllText } = Astro.props;
+
+const photos = [
+  { src: '/images/gallery/10-mali.jpeg', alt: 'Maraîchage bio-intensif au Mali' },
+  { src: '/images/gallery/09-mali.jpeg', alt: 'Cultures sahéliennes et sol vivant' },
+  { src: '/images/gallery/07-mali.jpeg', alt: 'Irrigation et aménagement maraîcher' },
+  { src: '/images/gallery/04-mali.jpeg', alt: 'Planches permanentes bio-intensives' },
+  { src: '/images/gallery/01-mali.jpg', alt: 'Ferme agroécologique Nakôbio' },
+  { src: '/images/gallery/12-participants.jpeg', alt: 'Groupe d’apprenants et formateurs' },
+  { src: '/images/gallery/06-participants.jpeg', alt: 'Démonstration pratique de semis' },
+  { src: '/images/gallery/05-participants.jpeg', alt: 'Session de formation paysanne' }
+];
+---
+
+<section id="galerie" class="gallery-section">
+  <div class="container">
+    <div class="gallery-header text-center">
+      <h2 class="section-title">{title}</h2>
+      <p class="gallery-desc">{description}</p>
+    </div>
+
+    <div class="gallery-grid">
+      {photos.map((photo) => (
+        <div class="gallery-item">
+          <img src={photo.src} alt={photo.alt} class="gallery-img" loading="lazy" />
+        </div>
+      ))}
+    </div>
+
+    <div class="gallery-action text-center">
+      <a 
+        href="https://tinyurl.com/nakobio-photos/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn btn-outline"
+      >
+        <span>{viewAllText}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-section {
+    padding-top: clamp(4.5rem, 8vw, 7rem);
+    padding-bottom: clamp(4.5rem, 8vw, 7rem);
+    background-color: var(--color-surface);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .gallery-header {
+    max-width: 680px;
+    margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .gallery-header .section-title {
+    color: var(--color-brand-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .gallery-desc {
+    font-size: var(--text-base);
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .gallery-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  .gallery-item {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    box-shadow: var(--shadow-sm);
+    background-color: var(--color-surface-sunken);
+  }
+
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .gallery-item:hover .gallery-img {
+    transform: scale(1.05);
+  }
+
+  .gallery-action {
+    margin-top: 2rem;
+  }
+</style>
