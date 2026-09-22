@@ -43,7 +43,7 @@ export const translations = {
     'actions.card1.title': 'Se former',
     'actions.card1.desc': 'Profitez de nos ressources gratuites et améliorez vos compétences en maraîchage bio-intensif.',
     'actions.card1.cta': 'Accédez à la formation',
-    'actions.card1.url': 'https://campus.nako.bio',
+    'actions.card1.url': 'https://www.youtube.com/@nakobio',
 
     'actions.card2.title': 'Rejoindre la communauté',
     'actions.card2.desc': 'Échangez avec d’autres agriculteurs, partagez vos expériences et participez à un réseau d’entraide.',
@@ -104,7 +104,7 @@ export const translations = {
     'actions.card1.title': 'Get Trained',
     'actions.card1.desc': 'Take advantage of our free resources and improve your skills in bio-intensive market gardening.',
     'actions.card1.cta': 'Access the training',
-    'actions.card1.url': 'https://campus.nako.bio',
+    'actions.card1.url': 'https://www.youtube.com/@nakobio',
 
     'actions.card2.title': 'Join the Community',
     'actions.card2.desc': "Engage with fellow farmers, share what you've learned, and join a mutual support community.",
@@ -165,7 +165,7 @@ export const translations = {
     'actions.card1.title': 'Schulungen erhalten',
     'actions.card1.desc': 'Nutzen Sie unsere kostenlosen Materialien, um sich im biointensiven Gemüsebau weiterzubilden.',
     'actions.card1.cta': 'Zugang zum Training',
-    'actions.card1.url': 'https://campus.nako.bio',
+    'actions.card1.url': 'https://www.youtube.com/@nakobio',
 
     'actions.card2.title': 'Der Gemeinschaft beitreten',
     'actions.card2.desc': 'Mit anderen Landwirten*innen vernetzen, Erfahrungen teilen, Unterstützung finden.',
